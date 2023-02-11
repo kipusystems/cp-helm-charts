@@ -106,6 +106,9 @@ cp-schema-registry:
 volumeMounts:
 # - name: credentials
 #   mountPath: /etc/creds-volume
+  - name: plugin-volume
+    mountPath: /usr/share/java/kafka-connect-plugins
+    readOnly: true
 
 ## List of volumeMounts for connect server container
 ## ref: https://kubernetes.io/docs/concepts/storage/volumes/
@@ -113,6 +116,8 @@ volumes:
 # - name: credentials
 #   secret:
 #     secretName: creds
+  - name: plugin-volume
+    emptyDir: {}
 
 ## Secret with multiple keys to serve the purpose of multiple secrets
 ## Values for all the keys will be base64 encoded when the Secret is created or updated
@@ -133,3 +138,12 @@ livenessProbe:
   # initialDelaySeconds: 30
   # periodSeconds: 5
   # failureThreshold: 10
+
+kafkaConnect:
+  plugins:
+    - name: debezium-connector-postgresql
+      version: debezium/debezium-connector-postgresql:1.0.0
+    - name: kafka-connect-jdbc
+      version: confluentinc/kafka-connect-jdbc:latest
+    - name: kafka-connect-s3
+      version: confluentinc/kafka-connect-s3:latest

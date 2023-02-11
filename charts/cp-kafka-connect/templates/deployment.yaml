@@ -33,6 +33,22 @@ spec:
       {{- end }}
       {{- end }}
     spec:
+      initContainers:
+      {{- range .Values.kafkaConnect.plugins }}
+        - name: confluent-hub-install-{{ .name }}
+          image: confluentinc/cp-kafka-connect-base
+          command: 
+            - sh
+            - -c
+            - |
+              confluent-hub install --no-prompt {{ .version }} --component-dir /plugins
+          env:
+            - name: CONFLUENT_HUB_CLIENT_SKIP_TLS_VERIFY
+              value: "true"
+          volumeMounts:
+            - name: plugin-volume
+              mountPath: /plugins
+      {{- end }}
       containers:
         {{- if .Values.prometheus.jmx.enabled }}
         - name: prometheus-jmx-exporter

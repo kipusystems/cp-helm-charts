@@ -2,7 +2,7 @@
 ## Zookeeper
 ## ------------------------------------------------------
 cp-zookeeper:
-  enabled: true
+  enabled: false
   servers: 3
   image: confluentinc/cp-zookeeper
   imageTag: 6.1.0
@@ -41,7 +41,7 @@ cp-zookeeper:
 ## Kafka
 ## ------------------------------------------------------
 cp-kafka:
-  enabled: true
+  enabled: false
   brokers: 3
   image: confluentinc/cp-enterprise-kafka
   imageTag: 6.1.0
