@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: merge-plugins-script
+  labels:
+    app: {{ template "cp-kafka-connect.name" . }}
+    chart: {{ template "cp-kafka-connect.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  merge-script.sh: |
+    #!/bin/sh
+
+    echo "Merging custom plugins into Kafka Connect plugins directory"
+    # cp /kipu-debezium-plugin/kipu-debezium.zip /plugins/
+    echo "Done merging custom plugins into Kafka Connect plugins directory"
+    echo "Listing contents of Kafka Connect plugins directory"
+    ls -l /plugins

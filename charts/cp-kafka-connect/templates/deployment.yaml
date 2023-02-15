@@ -34,6 +34,16 @@ spec:
       {{- end }}
     spec:
       initContainers:
+        - name: kipu-debezium-init
+          image: busybox
+          command: 
+            - sh
+            - -c
+            - |
+              echo "Mounted volume with custom plugin kipu-debezium (debezium-source-plugin.zip)"
+          volumeMounts:
+            - name: kipu-debezium-plugin-volume
+              mountPath: /plugins
       {{- range .Values.kafkaConnect.plugins }}
         - name: confluent-hub-install-{{ .name }}
           image: confluentinc/cp-kafka-connect-base
@@ -49,6 +59,16 @@ spec:
             - name: plugin-volume
               mountPath: /plugins
       {{- end }}
+        # - name: merge-plugins-init
+        #   image: busybox
+        #   command: ["/bin/sh", "/scripts/merge-script.sh"]
+        #   volumeMounts:
+        #     - name: plugin-volume
+        #       mountPath: /plugins
+        #     - name: kipu-debezium-plugin-volume
+        #       mountPath: /kipu-debezium-plugin
+        #     - name: scripts-volume
+        #       mountPath: /scripts
       containers:
         {{- if .Values.prometheus.jmx.enabled }}
         - name: prometheus-jmx-exporter
