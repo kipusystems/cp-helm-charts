@@ -59,16 +59,16 @@ spec:
             - name: plugin-volume
               mountPath: /plugins
       {{- end }}
-        # - name: merge-plugins-init
-        #   image: busybox
-        #   command: ["/bin/sh", "/scripts/merge-script.sh"]
-        #   volumeMounts:
-        #     - name: plugin-volume
-        #       mountPath: /plugins
-        #     - name: kipu-debezium-plugin-volume
-        #       mountPath: /kipu-debezium-plugin
-        #     - name: scripts-volume
-        #       mountPath: /scripts
+        - name: merge-plugins-init
+          image: ubuntu:22.04
+          command: ["/bin/sh", "/scripts/merge-script.sh"]
+          volumeMounts:
+            - name: plugin-volume
+              mountPath: /plugins
+            - name: kipu-debezium-plugin-volume
+              mountPath: /kipu-debezium-plugin
+            - name: scripts-volume
+              mountPath: /scripts
       containers:
         {{- if .Values.prometheus.jmx.enabled }}
         - name: prometheus-jmx-exporter

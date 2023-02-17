@@ -23,7 +23,7 @@ servicePort: 8083
 ## Kafka Connect properties
 ## ref: https://docs.confluent.io/current/connect/userguide.html#configuring-workers
 configurationOverrides:
-  "plugin.path": "/usr/share/java,/usr/share/confluent-hub-components"
+  "plugin.path": "/usr/share/java,/usr/share/confluent-hub-components,/usr/share/java/kafka-connect-plugins/kipu-debezium-postgres"
   "key.converter": "io.confluent.connect.avro.AvroConverter"
   "value.converter": "io.confluent.connect.avro.AvroConverter"
   "key.converter.schemas.enable": "false"
@@ -111,6 +111,8 @@ volumeMounts:
     # readOnly: true
   - name: kipu-debezium-plugin-volume
     mountPath: /opt/confluent/custom-plugins
+  - name: scripts-volume
+    mountPath: /etc/scripts
 
 ## List of volumeMounts for connect server container
 ## ref: https://kubernetes.io/docs/concepts/storage/volumes/
@@ -123,9 +125,9 @@ volumes:
   - name: kipu-debezium-plugin-volume
     configMap:
       name: kipu-debezium-configmap
-  # - name: scripts-volume
-  #   configMap:
-  #     name: merge-plugins-script
+  - name: scripts-volume
+    configMap:
+      name: merge-plugins-script
 
 ## Secret with multiple keys to serve the purpose of multiple secrets
 ## Values for all the keys will be base64 encoded when the Secret is created or updated

@@ -12,7 +12,46 @@ data:
     #!/bin/sh
 
     echo "Merging custom plugins into Kafka Connect plugins directory"
-    # cp /kipu-debezium-plugin/kipu-debezium.zip /plugins/
+    apt-get update -y && apt-get upgrade -y
+    apt-get install -y curl
+    mkdir -p /plugins/kipu-debezium-postgres/lib
+    curl -o /plugins/kipu-debezium-postgres/lib/checker-qual-3.5.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/checker-qual-3.5.0.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/debezium-api-1.7.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-api-1.7.0-SNAPSHOT.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/debezium-core-1.7.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-core-1.7.0-SNAPSHOT.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/debezium-connector-postgres-1.7.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-connector-postgres-1.7.0-SNAPSHOT.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/failureaccess-1.0.1.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/failureaccess-1.0.1.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/guava-30.0-jre.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/guava-30.0-jre.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/postgresql-42.2.23.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/postgresql-42.2.23.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/protobuf-java-3.17.3.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/protobuf-java-3.17.3.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/TimestampConverter-1.2.4-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/TimestampConverter-1.2.4-SNAPSHOT.jar
+    cat <<EOF > /plugins/kipu-debezium-postgres/manifest.json
+    {
+      "version": "1.0",
+      "connector-class": "com.your",
+      "type": "source",
+      "name": "KipuDebeziumPostgres",
+      # "config-class": "com.example.MyCustomConfig",
+      # "transforms": [
+      #   "com.example.MyCustomTransform"
+      # ],
+      # "tasks": [
+      #   "com.example.MyCustomTask"
+      # ],
+      "dependencies": [
+        "checker-qual-3.5.0",
+        "debezium-api-1.7.0-SNAPSHOT",
+        "debezium-core-1.7.0-SNAPSHOT",
+        "debezium-connector-postgres-1.7.0-SNAPSHOT",
+        "failureaccess-1.0.1",
+        "guava-30.0-jre",
+        "postgresql-42.2.23",
+        "protobuf-java-3.17.3",
+        "TimestampConverter-1.2.4-SNAPSHOT"
+      ],
+      "java-version": "11"
+    }
+    EOF
     echo "Done merging custom plugins into Kafka Connect plugins directory"
     echo "Listing contents of Kafka Connect plugins directory"
+
     ls -l /plugins
