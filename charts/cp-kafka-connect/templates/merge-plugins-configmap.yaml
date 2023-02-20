@@ -26,32 +26,35 @@ data:
     curl -o /plugins/kipu-debezium-postgres/lib/TimestampConverter-1.2.4-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/TimestampConverter-1.2.4-SNAPSHOT.jar
     cat <<EOF > /plugins/kipu-debezium-postgres/manifest.json
     {
-      "version": "1.0",
-      "connector-class": "com.your",
-      "type": "source",
-      "name": "KipuDebeziumPostgres",
-      # "config-class": "com.example.MyCustomConfig",
-      # "transforms": [
-      #   "com.example.MyCustomTransform"
-      # ],
-      # "tasks": [
-      #   "com.example.MyCustomTask"
-      # ],
-      "dependencies": [
-        "checker-qual-3.5.0",
-        "debezium-api-1.7.0-SNAPSHOT",
-        "debezium-core-1.7.0-SNAPSHOT",
-        "debezium-connector-postgres-1.7.0-SNAPSHOT",
-        "failureaccess-1.0.1",
-        "guava-30.0-jre",
-        "postgresql-42.2.23",
-        "protobuf-java-3.17.3",
-        "TimestampConverter-1.2.4-SNAPSHOT"
-      ],
-      "java-version": "11"
+        "version": "1.7.0",
+        "connectors": [
+            {
+                "name": "kipu-debezium",
+                "class": "io.debezium.connector.postgresql.PostgresConnector",
+                "type": "source",
+                "version": "1.7.0",
+                "config": {
+                    "connector.class": "io.debezium.connector.postgresql.PostgresConnector"
+                },
+                "dependencies": [
+                    "checker-qual-3.5.0.jar",
+                    "debezium-api-1.7.0-SNAPSHOT.jar",
+                    "debezium-connector-postgres-1.7.0-SNAPSHOT.jar",
+                    "debezium-core-1.7.0-SNAPSHOT.jar",
+                    "failureaccess-1.0.1.jar",
+                    "guava-30.0-jre.jar",
+                    "postgresql-42.2.22.jar",
+                    "protobuf-java-3.8.0.jar",
+                    "TimestampConverter-1.2.4-SNAPSHOT.jar"
+                ]
+            }
+        ]
     }
     EOF
     echo "Done merging custom plugins into Kafka Connect plugins directory"
-    echo "Listing contents of Kafka Connect plugins directory"
 
+    echo "Setting permissions on Kafka Connect plugins directory"
+    chwon -R appuser:appuser /plugins/kipu-debezium-postgres
+
+    echo "Listing contents of Kafka Connect plugins directory"
     ls -l /plugins

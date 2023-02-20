@@ -60,7 +60,7 @@ spec:
               mountPath: /plugins
       {{- end }}
         - name: merge-plugins-init
-          image: ubuntu:22.04
+          image: confluentinc/cp-kafka-connect-base
           command: ["/bin/sh", "/scripts/merge-script.sh"]
           volumeMounts:
             - name: plugin-volume
@@ -69,6 +69,17 @@ spec:
               mountPath: /kipu-debezium-plugin
             - name: scripts-volume
               mountPath: /scripts
+        # - name: change-ownership
+        #   image: confluentinc/cp-kafka-connect-base
+        #   command: ["/bin/sh", "-c"]
+        #   args:
+        #   - cp /kipu-debezium-plugin/* /tmp && chown -R 1000:1000 /change-ownership
+        #   volumeMounts:
+        #     - name: change-ownership
+        #       mountPath: /change-ownership
+        #       readOnly: false
+        #     - name: kipu-debezium-plugin-volume
+        #       mountPath: /kipu-debezium-plugin
       containers:
         {{- if .Values.prometheus.jmx.enabled }}
         - name: prometheus-jmx-exporter

@@ -27,6 +27,18 @@ helm --namespace confluent-platform \
      --set cp-schema-registry.kafka.bootstrapServers=$BOOTSTRAP_SERVERS
 ```
 
+## Run with Kafka and Zoopeeker in Kubernetes side
+
+```shell
+helm --namespace confluent-platform \
+     upgrade --install confluent-platform </path/to/repo>/cp-helm-charts/ \
+     -f </path/to/repo>/cp-helm-charts/values.yaml \
+     --set cp-kafka-connect.cp-schema-registry.url="confluent-platform-cp-schema-registry:8081" \
+     --set cp-kafka-rest.cp-schema-registry.url="confluent-platform-cp-schema-registry:8081" \
+     --set cp-zookeeper.enabled=true \
+     --set cp-kafka.enabled=true
+```
+
 ## How to uninstall it all
 
 ```shell

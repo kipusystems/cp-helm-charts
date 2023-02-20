@@ -23,7 +23,7 @@ servicePort: 8083
 ## Kafka Connect properties
 ## ref: https://docs.confluent.io/current/connect/userguide.html#configuring-workers
 configurationOverrides:
-  "plugin.path": "/usr/share/java,/usr/share/confluent-hub-components,/usr/share/java/kafka-connect-plugins/kipu-debezium-postgres"
+  "plugin.path": "/usr/share/java,/usr/share/confluent-hub-components,/usr/share/java/kafka-connect-plugins"
   "key.converter": "io.confluent.connect.avro.AvroConverter"
   "value.converter": "io.confluent.connect.avro.AvroConverter"
   "key.converter.schemas.enable": "false"
@@ -128,6 +128,8 @@ volumes:
   - name: scripts-volume
     configMap:
       name: merge-plugins-script
+  # - name: change-ownership
+  #   emptyDir: {}
 
 ## Secret with multiple keys to serve the purpose of multiple secrets
 ## Values for all the keys will be base64 encoded when the Secret is created or updated
@@ -151,9 +153,9 @@ livenessProbe:
 
 kafkaConnect:
   plugins:
-    - name: debezium-connector-postgresql
-      version: debezium/debezium-connector-postgresql:1.0.0
-    - name: kafka-connect-jdbc
-      version: confluentinc/kafka-connect-jdbc:latest
-    - name: kafka-connect-s3
-      version: confluentinc/kafka-connect-s3:latest
+#     - name: debezium-connector-postgresql
+#       version: debezium/debezium-connector-postgresql:1.0.0
+#     - name: kafka-connect-jdbc
+#       version: confluentinc/kafka-connect-jdbc:latest
+#     - name: kafka-connect-s3
+#       version: confluentinc/kafka-connect-s3:latest
