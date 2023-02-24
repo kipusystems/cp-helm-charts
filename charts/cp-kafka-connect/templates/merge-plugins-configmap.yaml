@@ -15,42 +15,33 @@ data:
     apt-get update -y && apt-get upgrade -y
     apt-get install -y curl
     mkdir -p /plugins/kipu-debezium-postgres/lib
-    curl -o /plugins/kipu-debezium-postgres/lib/checker-qual-3.5.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/checker-qual-3.5.0.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/debezium-api-1.7.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-api-1.7.0-SNAPSHOT.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/debezium-core-1.7.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-core-1.7.0-SNAPSHOT.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/debezium-connector-postgres-1.7.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-connector-postgres-1.7.0-SNAPSHOT.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/failureaccess-1.0.1.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/failureaccess-1.0.1.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/guava-30.0-jre.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/guava-30.0-jre.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/postgresql-42.2.23.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/postgresql-42.2.23.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/protobuf-java-3.17.3.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/protobuf-java-3.17.3.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/TimestampConverter-1.2.4-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/TimestampConverter-1.2.4-SNAPSHOT.jar
-    cat <<EOF > /plugins/kipu-debezium-postgres/manifest.json
-    {
-        "version": "1.7.0",
-        "connectors": [
-            {
-                "name": "kipu-debezium",
-                "class": "io.debezium.connector.postgresql.PostgresConnector",
-                "type": "source",
-                "version": "1.7.0",
-                "config": {
-                    "connector.class": "io.debezium.connector.postgresql.PostgresConnector"
-                },
-                "dependencies": [
-                    "checker-qual-3.5.0.jar",
-                    "debezium-api-1.7.0-SNAPSHOT.jar",
-                    "debezium-connector-postgres-1.7.0-SNAPSHOT.jar",
-                    "debezium-core-1.7.0-SNAPSHOT.jar",
-                    "failureaccess-1.0.1.jar",
-                    "guava-30.0-jre.jar",
-                    "postgresql-42.2.22.jar",
-                    "protobuf-java-3.8.0.jar",
-                    "TimestampConverter-1.2.4-SNAPSHOT.jar"
-                ]
-            }
-        ]
-    }
-    EOF
+    curl -o /plugins/kipu-debezium-postgres/lib/debezium-api-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-api-2.0.0-SNAPSHOT.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/debezium-connector-postgres-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-connector-postgres-2.0.0-SNAPSHOT.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/debezium-core-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-core-2.0.0-SNAPSHOT.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/postgresql-42.2.22.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/postgresql-42.2.22.jar
+    curl -o /plugins/kipu-debezium-postgres/manifest.json https://kipu-wiki.s3.amazonaws.com/test-plugin/manifest.json
+    # cat <<EOF > /plugins/kipu-debezium-postgres/manifest.json
+    # {
+    #     "version": "1.0",
+    #     "connectors": [
+    #         {
+    #             "name": "kipu-debezium",
+    #             "class": "io.debezium.connector.postgresql.PostgresConnector",
+    #             "type": "source",
+    #             "version": "1.0.0",
+    #             "config": {
+    #                 "connector.class": "io.debezium.connector.postgresql.PostgresConnector"
+    #             },
+    #             "dependencies": [
+    #                 "debezium-api-2.0.0-SNAPSHOT.jar",
+    #                 "debezium-connector-postgres-2.0.0-SNAPSHOT.jar",
+    #                 "debezium-core-2.0.0-SNAPSHOT.jar",
+    #                 "postgresql-42.2.22.jar",
+    #             ]
+    #         }
+    #     ]
+    # }
+    # EOF
     echo "Done merging custom plugins into Kafka Connect plugins directory"
 
     echo "Setting permissions on Kafka Connect plugins directory"
