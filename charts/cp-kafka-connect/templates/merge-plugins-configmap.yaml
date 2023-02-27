@@ -19,7 +19,7 @@ data:
     curl -o /plugins/kipu-debezium-postgres/lib/debezium-connector-postgres-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-connector-postgres-2.0.0-SNAPSHOT.jar
     curl -o /plugins/kipu-debezium-postgres/lib/debezium-core-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-core-2.0.0-SNAPSHOT.jar
     curl -o /plugins/kipu-debezium-postgres/lib/postgresql-42.2.22.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/postgresql-42.2.22.jar
-    curl -o /plugins/kipu-debezium-postgres/manifest.json https://kipu-wiki.s3.amazonaws.com/test-plugin/manifest.json
+    # curl -o /plugins/kipu-debezium-postgres/manifest.json https://kipu-wiki.s3.amazonaws.com/test-plugin/manifest.json
     # cat <<EOF > /plugins/kipu-debezium-postgres/manifest.json
     # {
     #     "version": "1.0",
