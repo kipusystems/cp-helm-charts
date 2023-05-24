@@ -11,7 +11,7 @@ helm --namespace confluent-platform upgrade --install confluent-platform /my-fol
 e.g.
 
 ```shell
-export BOOTSTRAP_SERVERS="PLAINTEXT://broker1:9092"
+export BOOTSTRAP_SERVERS="PLAINTEXT://broker1:9092,PLAINTEXT://broker2:9092,PLAINTEXT://broker3:9092"
 export ZOOKEEPER_ENDPOINT="z-1:2181"
 
 helm --namespace confluent-platform \
@@ -21,6 +21,8 @@ helm --namespace confluent-platform \
      --set cp-ksql-server.kafka.bootstrapServers=$BOOTSTRAP_SERVERS \
      --set cp-kafka-connect.kafka.bootstrapServers=$BOOTSTRAP_SERVERS \
      --set cp-kafka-connect.cp-schema-registry.url="confluent-platform-cp-schema-registry:8081" \
+     --set cp-kafka-connect.environment.hosting=cloud
+     --set cp-kafka-connect.environment.sslCertificate=<cert_arn>
      --set cp-kafka-rest.cp-zookeeper.url=$ZOOKEEPER_ENDPOINT \
      --set cp-kafka-rest.cp-schema-registry.url="confluent-platform-cp-schema-registry:8081" \
      --set cp-kafka-rest.cp-kafka.bootstrapServers=$BOOTSTRAP_SERVERS \
@@ -120,7 +122,7 @@ You can run these commands from inside the container, or alternatively if there 
 Listing connectors:
 
 ```shell
-curl http://localhost:8083/connectors --write-out "%{http_code}\\n"
+curl -s http://localhost:8083/connectors | tr -d '["\n]' | sed 's/,/\/g' && echo -e "\nTotal connectors: $(curl -s http://localhost:8083/connectors | tr -d '["\n]' | sed 's/,/ /g' | wc -w)"
 ```
 
 Deleting a connector:
