@@ -15,9 +15,9 @@ data:
     apt-get update -y && apt-get upgrade -y
     apt-get install -y curl
     mkdir -p /plugins/kipu-debezium-postgres/lib
-    curl -o /plugins/kipu-debezium-postgres/lib/debezium-api-2.2.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-api-2.2.0-SNAPSHOT.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/debezium-connector-postgres-2.2.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-connector-postgres-2.2.0-SNAPSHOT.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/debezium-core-2.2.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-core-2.2.0-SNAPSHOT.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/debezium-api-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-api-2.0.0-SNAPSHOT.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/debezium-connector-postgres-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-connector-postgres-2.0.0-SNAPSHOT.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/debezium-core-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-core-2.0.0-SNAPSHOT.jar
     curl -o /plugins/kipu-debezium-postgres/lib/postgresql-42.2.22.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/postgresql-42.2.22.jar
     # curl -o /plugins/kipu-debezium-postgres/manifest.json https://kipu-wiki.s3.amazonaws.com/test-plugin/manifest.json
     # cat <<EOF > /plugins/kipu-debezium-postgres/manifest.json
