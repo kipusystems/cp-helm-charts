@@ -11,32 +11,24 @@ helm --namespace confluent-platform upgrade --install confluent-platform /my-fol
 e.g.
 
 ```shell
-export BOOTSTRAP_SERVERS="PLAINTEXT://broker1:9092,PLAINTEXT://broker2:9092,PLAINTEXT://broker3:9092"
-export ZOOKEEPER_ENDPOINT="z-1:2181"
+export BOOTSTRAP_SERVERS="PLAINTEXT://confluent-platform-cp-kafka-0.confluent-platform-cp-kafka-headless:9092"
+export ZOOKEEPER_ENDPOINT="confluent-platform-cp-zookeeper-headless:2181"
+export CERT_ARN="arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012"
 
 helm --namespace confluent-platform \
-     upgrade --install confluent-platform </path/to/repo>/cp-helm-charts/ \
-     -f </path/to/repo>/cp-helm-charts/values.yaml \
+     upgrade --install confluent-platform . \
+     --create-namespace \
+     -f values.yaml \
      --set cp-control-center.kafka.bootstrapServers=$BOOTSTRAP_SERVERS \
      --set cp-ksql-server.kafka.bootstrapServers=$BOOTSTRAP_SERVERS \
      --set cp-kafka-connect.kafka.bootstrapServers=$BOOTSTRAP_SERVERS \
      --set cp-kafka-connect.cp-schema-registry.url="confluent-platform-cp-schema-registry:8081" \
-     --set cp-kafka-connect.environment.hosting=cloud
-     --set cp-kafka-connect.environment.sslCertificate=<cert_arn>
+     --set cp-kafka-connect.environment.hosting=cloud \
+     --set cp-kafka-connect.environment.sslCertificate=$CERT_ARN \
      --set cp-kafka-rest.cp-zookeeper.url=$ZOOKEEPER_ENDPOINT \
      --set cp-kafka-rest.cp-schema-registry.url="confluent-platform-cp-schema-registry:8081" \
      --set cp-kafka-rest.cp-kafka.bootstrapServers=$BOOTSTRAP_SERVERS \
-     --set cp-schema-registry.kafka.bootstrapServers=$BOOTSTRAP_SERVERS
-```
-
-## Run with Kafka and Zoopeeker in Kubernetes side
-
-```shell
-helm --namespace confluent-platform \
-     upgrade --install confluent-platform </path/to/repo>/cp-helm-charts/ \
-     -f </path/to/repo>/cp-helm-charts/values.yaml \
-     --set cp-kafka-connect.cp-schema-registry.url="confluent-platform-cp-schema-registry:8081" \
-     --set cp-kafka-rest.cp-schema-registry.url="confluent-platform-cp-schema-registry:8081" \
+     --set cp-schema-registry.kafka.bootstrapServers=$BOOTSTRAP_SERVERS \
      --set cp-zookeeper.enabled=true \
      --set cp-kafka.enabled=true
 ```

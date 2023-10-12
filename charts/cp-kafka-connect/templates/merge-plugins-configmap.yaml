@@ -12,36 +12,18 @@ data:
     #!/bin/sh
 
     echo "Merging custom plugins into Kafka Connect plugins directory"
+
     apt-get update -y && apt-get upgrade -y
     apt-get install -y curl
+
     mkdir -p /plugins/kipu-debezium-postgres/lib
+
     curl -o /plugins/kipu-debezium-postgres/lib/debezium-api-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-api-2.0.0-SNAPSHOT.jar
     curl -o /plugins/kipu-debezium-postgres/lib/debezium-connector-postgres-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-connector-postgres-2.0.0-SNAPSHOT.jar
     curl -o /plugins/kipu-debezium-postgres/lib/debezium-core-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-core-2.0.0-SNAPSHOT.jar
     curl -o /plugins/kipu-debezium-postgres/lib/postgresql-42.2.22.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/postgresql-42.2.22.jar
-    # curl -o /plugins/kipu-debezium-postgres/manifest.json https://kipu-wiki.s3.amazonaws.com/test-plugin/manifest.json
-    # cat <<EOF > /plugins/kipu-debezium-postgres/manifest.json
-    # {
-    #     "version": "1.0",
-    #     "connectors": [
-    #         {
-    #             "name": "kipu-debezium",
-    #             "class": "io.debezium.connector.postgresql.PostgresConnector",
-    #             "type": "source",
-    #             "version": "1.0.0",
-    #             "config": {
-    #                 "connector.class": "io.debezium.connector.postgresql.PostgresConnector"
-    #             },
-    #             "dependencies": [
-    #                 "debezium-api-2.0.0-SNAPSHOT.jar",
-    #                 "debezium-connector-postgres-2.0.0-SNAPSHOT.jar",
-    #                 "debezium-core-2.0.0-SNAPSHOT.jar",
-    #                 "postgresql-42.2.22.jar",
-    #             ]
-    #         }
-    #     ]
-    # }
-    # EOF
+    curl -o /plugins/kipu-debezium-postgres/lib/connect-transforms-0.1.1.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/connect-transforms-0.1.1.jar
+
     echo "Done merging custom plugins into Kafka Connect plugins directory"
 
     echo "Setting permissions on Kafka Connect plugins directory"
