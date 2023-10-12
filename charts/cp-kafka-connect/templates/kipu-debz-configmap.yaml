@@ -17,4 +17,3 @@ data:
   postgresql-42.2.23.jar: custom-plugins/debezium-connector-postgres-1.7.0/postgresql-42.2.23.jar
   protobuf-java-3.17.3.jar: custom-plugins/debezium-connector-postgres-1.7.0/protobuf-java-3.17.3.jar
   TimestampConverter-1.2.4-SNAPSHOT.jar: custom-plugins/debezium-connector-postgres-1.7.0/TimestampConverter-1.2.4-SNAPSHOT.jar
-
