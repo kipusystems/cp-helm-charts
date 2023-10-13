@@ -142,3 +142,7 @@ curl -X POST -H "Content-Type: application/json" --data '{
   }
 }' http://localhost:8083>/connectors
 ```
+
+## Confluent Control Center
+
+This comes with a limitation to use for 29 days. This is stored in system topic <span style="color:red">_confluent-command</span>. You can safely delete, restart control center, and it will restart the trial period.
