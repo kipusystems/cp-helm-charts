@@ -21,34 +21,12 @@ data:
     curl -o /plugins/kipu-debezium-postgres/lib/debezium-api-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-api-2.0.0-SNAPSHOT.jar
     curl -o /plugins/kipu-debezium-postgres/lib/debezium-connector-postgres-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-connector-postgres-2.0.0-SNAPSHOT.jar
     curl -o /plugins/kipu-debezium-postgres/lib/debezium-core-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-core-2.0.0-SNAPSHOT.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/accessors-smart-2.4.7.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/accessors-smart-2.4.7.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/ons-19.7.0.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/ons-19.7.0.0.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/asm-9.1.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/asm-9.1.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/oraclepki-19.7.0.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/oraclepki-19.7.0.0.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/checker-qual-3.5.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/checker-qual-3.5.0.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/orai18n-19.7.0.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/orai18n-19.7.0.0.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/common-utils-6.0.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/common-utils-6.0.0.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/osdt_cert-19.7.0.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/osdt_cert-19.7.0.0.jar
     curl -o /plugins/kipu-debezium-postgres/lib/connect-transforms-0.1.1.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/connect-transforms-0.1.1.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/osdt_core-19.7.0.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/osdt_core-19.7.0.0.jar
     curl -o /plugins/kipu-debezium-postgres/lib/connect-transforms-1.4.2.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/connect-transforms-1.4.2.jar
     curl -o /plugins/kipu-debezium-postgres/lib/postgresql-42.3.3.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/postgresql-42.3.3.jar
     curl -o /plugins/kipu-debezium-postgres/lib/connect-utils-0.1.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/connect-utils-0.1.0.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/simplefan-19.7.0.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/simplefan-19.7.0.0.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/joda-time-2.10.3.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/joda-time-2.10.3.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/slf4j-api-1.7.25.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/slf4j-api-1.7.25.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/json-path-2.6.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/json-path-2.6.0.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/slf4j-api-1.7.30.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/slf4j-api-1.7.30.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/json-smart-2.4.7.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/json-smart-2.4.7.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/sqlite-jdbc-3.25.2.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/sqlite-jdbc-3.25.2.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/jtds-1.3.1.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/jtds-1.3.1.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/ucp-19.7.0.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/ucp-19.7.0.0.jar
     curl -o /plugins/kipu-debezium-postgres/lib/kafka-connect-jdbc-10.4.1.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/kafka-connect-jdbc-10.4.1.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/xdb-19.7.0.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/xdb-19.7.0.0.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/mssql-jdbc-8.4.1.jre8.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/mssql-jdbc-8.4.1.jre8.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/xmlparserv2-19.7.0.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/xmlparserv2-19.7.0.0.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/ojdbc8-19.7.0.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/ojdbc8-19.7.0.0.jar
-
+    
     echo "Done merging custom plugins into Kafka Connect plugins directory"
 
     echo "Setting permissions on Kafka Connect plugins directory"

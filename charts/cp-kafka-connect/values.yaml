@@ -155,9 +155,9 @@ kafkaConnect:
   plugins:
     # - name: debezium-connector-postgresql
     #   version: debezium/debezium-connector-postgresql:1.0.0
-    - name: connect-transforms
-      version: confluentinc/connect-transforms:1.4.3
-    # - name: kafka-connect-jdbc
-    #   version: confluentinc/kafka-connect-jdbc:latest
+    # - name: connect-transforms
+    #   version: confluentinc/connect-transforms:1.4.3
+    - name: kafka-connect-jdbc
+      version: confluentinc/kafka-connect-jdbc:latest
     # - name: kafka-connect-s3
     #   version: confluentinc/kafka-connect-s3:latest
