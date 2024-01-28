@@ -138,6 +138,17 @@ spec:
             - name: KAFKA_JMX_PORT
               value: "{{ .Values.jmx.port }}"
             {{- end }}
+            - name: OFFSET_FLUSH_TIMEOUT_MS
+              value: '60000'
+            - name: OFFSET_FLUSH_INTERVAL_MS
+              value: '15000'
+          resources:
+            limits:
+              cpu: '1'
+              memory: 6Gi
+            requests:
+              cpu: 500m
+              memory: 6Gi
         {{- if .Values.customEnv.CUSTOM_SCRIPT_PATH }}
           command:
             - /bin/bash
