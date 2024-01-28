@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kipu-debezium-configmap
+  labels:
+    app: {{ template "cp-kafka-connect.name" . }}
+    chart: {{ template "cp-kafka-connect.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  checker-qual-3.5.0.jar: custom-plugins/debezium-connector-postgres-1.7.0/checker-qual-3.5.0.jar
+  debezium-api-1.7.0-SNAPSHOT.jar: custom-plugins/debezium-connector-postgres-1.7.0/debezium-api-1.7.0-SNAPSHOT.jar
+  debezium-connector-postgres-1.7.0-SNAPSHOT.jar: custom-plugins/debezium-connector-postgres-1.7.0/debezium-connector-postgres-1.7.0-SNAPSHOT.jar
+  debezium-core-1.7.0-SNAPSHOT.jar: custom-plugins/debezium-connector-postgres-1.7.0/debezium-core-1.7.0-SNAPSHOT.jar
+  failureaccess-1.0.1.jar: custom-plugins/debezium-connector-postgres-1.7.0/failureaccess-1.0.1.jar
+  guava-30.0-jre.jar: custom-plugins/debezium-connector-postgres-1.7.0/guava-30.0-jre.jar
+  postgresql-42.2.23.jar: custom-plugins/debezium-connector-postgres-1.7.0/postgresql-42.2.23.jar
+  protobuf-java-3.17.3.jar: custom-plugins/debezium-connector-postgres-1.7.0/protobuf-java-3.17.3.jar
+  TimestampConverter-1.2.4-SNAPSHOT.jar: custom-plugins/debezium-connector-postgres-1.7.0/TimestampConverter-1.2.4-SNAPSHOT.jar
