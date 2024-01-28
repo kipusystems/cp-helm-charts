@@ -22,9 +22,9 @@ cp-zookeeper:
     ## Size for data log dir, which is a dedicated log device to be used, and helps avoid competition between logging and snaphots.
     dataLogDirSize: 10Gi
     # dataLogDirStorageClass: ""
-    
-  # TODO: find correct security context for user in this zk-image  
-  securityContext: 
+
+  # TODO: find correct security context for user in this zk-image
+  securityContext:
     runAsUser: 0
 
   resources: {}
@@ -64,14 +64,14 @@ cp-kafka:
   #  requests:
   #   cpu: 100m
   #   memory: 128Mi
-  securityContext: 
+  securityContext:
     runAsUser: 0
 
 ## ------------------------------------------------------
 ## Schema Registry
 ## ------------------------------------------------------
 cp-schema-registry:
-  enabled: true
+  enabled: false
   image: confluentinc/cp-schema-registry
   imageTag: 6.1.0
   ## Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
@@ -137,7 +137,7 @@ cp-kafka-connect:
 ## KSQL Server
 ## ------------------------------------------------------
 cp-ksql-server:
-  enabled: true
+  enabled: false
   image: confluentinc/cp-ksqldb-server
   imageTag: 6.1.0
   ## Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
