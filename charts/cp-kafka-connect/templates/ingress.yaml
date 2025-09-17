@@ -1,21 +1,26 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: confluent-platform-cp-kafka-connect-ingress
-  namespace: confluent-platform
+  name: {{ .Values.ingress.name }}
+  namespace: {{ .Values.namespace.name }}
   annotations:
-    alb.ingress.kubernetes.io/scheme: internal
-    alb.ingress.kubernetes.io/subnets: subnet-081f93ed9aa680786,subnet-02086c09e2d9eb61d
-    alb.ingress.kubernetes.io/target-type: ip
-    kubernetes.io/ingress.class: alb
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.certManager }}
+    kubernetes.io/ingress.class: {{ .Values.ingress.className }}
+    haproxy.org/force-ssl-redirect: "true"
 spec:
+  ingressClassName: {{ .Values.ingress.className }}
   rules:
-    - http:
+    - host: {{ .Values.ingress.host }}
+      http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: confluent-platform-cp-kafka-connect
+                name: {{ template "cp-kafka-connect.fullname" . }}
                 port:
-                  name: kafka-connect
+                  number: {{ .Values.servicePort }}
+  tls:
+    - hosts:
+        - {{ .Values.ingress.host }}
+      secretName: {{ .Values.ingress.secretName }}
