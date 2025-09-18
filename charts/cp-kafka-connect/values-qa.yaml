@@ -170,3 +170,10 @@ ingress:
   host: kafka-connect.kipuqa.com
   className: haproxy
   secretName: cp-kafka-connect-tls
+
+cpKafkaConnect:
+  resources:
+    limits:
+      memory: 6gb
+    requests:
+      memory: 5gb

@@ -143,12 +143,7 @@ spec:
             - name: OFFSET_FLUSH_INTERVAL_MS
               value: '15000'
           resources:
-            limits:
-              cpu: '1'
-              memory: 6Gi
-            requests:
-              cpu: 500m
-              memory: 6Gi
+{{ toYaml .Values.cpKafkaConnect.resources | indent 12 }}
         {{- if .Values.customEnv.CUSTOM_SCRIPT_PATH }}
           command:
             - /bin/bash
