@@ -104,7 +104,7 @@ spec:
               name: jmx
             {{- end }}
           resources:
-{{ toYaml .Values.resources | indent 12 }}
+{{ toYaml .Values.kafkaConnect.resources | indent 12 }}
           env:
             - name: CONNECT_REST_ADVERTISED_HOST_NAME
               valueFrom:
@@ -143,7 +143,7 @@ spec:
             - name: OFFSET_FLUSH_INTERVAL_MS
               value: '15000'
           resources:
-{{ toYaml .Values.cpKafkaConnect.resources | indent 12 }}
+{{ toYaml .Values.kafkaConnect.resources | indent 12 }}
         {{- if .Values.customEnv.CUSTOM_SCRIPT_PATH }}
           command:
             - /bin/bash
