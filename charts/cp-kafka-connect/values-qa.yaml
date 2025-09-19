@@ -153,14 +153,8 @@ livenessProbe:
 
 kafkaConnect:
   plugins:
-    # - name: debezium-connector-postgresql
-    #   version: debezium/debezium-connector-postgresql:1.0.0
-    # - name: connect-transforms
-    #   version: confluentinc/connect-transforms:1.4.3
     - name: kafka-connect-jdbc
       version: confluentinc/kafka-connect-jdbc:latest
-    # - name: kafka-connect-s3
-    #   version: confluentinc/kafka-connect-s3:latest
   topics:
     connectConfigStorageTopic: confluent-platform-cp-kafka-connect-config
     connectOffsetStorageTopic: confluent-platform-cp-kafka-connect-offset
@@ -175,7 +169,9 @@ ingress:
   enabled: true
   name: cp-kafka-connect
   successCodes: "200-399"
-  certManager: letsencrypt-prod-haproxy
   host: kafka-connect.kipuqa.com
   className: haproxy
-  secretName: cp-kafka-connect-tls
+  annotations:
+    haproxy.org/server-ssl: "false"
+    haproxy.org/force-ssl-redirect: "false"
+    kubernetes.io/ingress.class: "haproxy-internal"

@@ -1,11 +1,15 @@
+{{- if .Values.ingress.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ .Values.ingress.name }}
   annotations:
+    {{- if .Values.ingress.certManager }}
     cert-manager.io/cluster-issuer: {{ .Values.ingress.certManager }}
-    kubernetes.io/ingress.class: {{ .Values.ingress.className }}
-    haproxy.org/force-ssl-redirect: "true"
+    {{- end }}
+    {{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   rules:
@@ -19,7 +23,10 @@ spec:
                 name: {{ template "cp-kafka-connect.fullname" . }}
                 port:
                   number: {{ .Values.servicePort }}
+  {{- if .Values.ingress.secretName }}
   tls:
     - hosts:
         - {{ .Values.ingress.host }}
       secretName: {{ .Values.ingress.secretName }}
+  {{- end }}
+{{- end }}
