@@ -30,7 +30,7 @@ data:
     echo "Done merging custom plugins into Kafka Connect plugins directory"
 
     echo "Setting permissions on Kafka Connect plugins directory"
-    chwon -R appuser:appuser /plugins/kipu-debezium-postgres
+    chown -R appuser:appuser /plugins/kipu-debezium-postgres
 
     echo "Listing contents of Kafka Connect plugins directory"
     ls -l /plugins
