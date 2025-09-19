@@ -165,6 +165,11 @@ kafkaConnect:
     connectConfigStorageTopic: confluent-platform-cp-kafka-connect-config
     connectOffsetStorageTopic: confluent-platform-cp-kafka-connect-offset
     connectStatusStorageTopic: confluent-platform-cp-kafka-connect-status
+  resources:
+    limits:
+      memory: 6Gi
+    requests:
+      memory: 6Gi
 
 ingress:
   enabled: true
@@ -174,10 +179,3 @@ ingress:
   host: kafka-connect.kipuqa.com
   className: haproxy
   secretName: cp-kafka-connect-tls
-
-kafkaConnect:
-  resources:
-    limits:
-      memory: 6Gi
-    requests:
-      memory: 6Gi
