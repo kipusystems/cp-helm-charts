@@ -167,7 +167,7 @@ kafkaConnect:
       memory: 6Gi
 
 ingress:
-  enabled: true
+  enabled: false
   name: cp-kafka-connect
   successCodes: "200-399"
   host: kafka-connect.kipuqa.com
