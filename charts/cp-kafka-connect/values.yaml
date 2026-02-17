@@ -2,7 +2,8 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 4
+replicaCount: 5
+overrideGroupId: confluent-platform
 
 ## Image Info
 ## ref: https://hub.docker.com/r/confluentinc/cp-kafka/
@@ -17,6 +18,7 @@ imagePullPolicy: IfNotPresent
 ## Secrets must be manually created in the namespace.
 ## ref: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
 imagePullSecrets:
+  - name: "dockerhub-secret"
 
 servicePort: 8083
 
@@ -35,35 +37,36 @@ configurationOverrides:
   "status.storage.replication.factor": "3"
 
 ## Kafka Connect JVM Heap Option
-heapOptions: "-Xms4g -Xmx4g"
+heapOptions: "-Xms3g -Xmx3g"
 
 ## Additional env variables
 ## CUSTOM_SCRIPT_PATH is the path of the custom shell script to be ran mounted in a volume
 customEnv: {}
   # CUSTOM_SCRIPT_PATH: /etc/scripts/create-connectors.sh
 
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #  cpu: 100m
-  #  memory: 128Mi
-  # requests:
-  #  cpu: 100m
-  #  memory: 128Mi
+resources:
+  limits:
+   cpu: 500m
+   memory: 4Gi
+  requests:
+   cpu: 250m
+   memory: 4Gi
 
 ## Custom pod annotations
 podAnnotations: {}
 
 ## Node labels for pod assignment
 ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
-nodeSelector: {}
+nodeSelector:
+  type: kafka-connect
 
 ## Taints to tolerate on node assignment:
 ## Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-tolerations: []
+tolerations:
+  - effect: NoSchedule
+    key: type
+    operator: Equal
+    value: kafka-connect
 
 ## Pod scheduling constraints
 ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity
@@ -94,12 +97,12 @@ prometheus:
 ## You can list load balanced service endpoint, or list of all brokers (which is hard in K8s).  e.g.:
 ## bootstrapServers: "PLAINTEXT://dozing-prawn-kafka-headless:9092"
 kafka:
-  bootstrapServers: ""
+  bootstrapServers: "b-1.mskclusterqa.glnopw.c12.kafka.us-east-1.amazonaws.com:9092,b-2.mskclusterqa.glnopw.c12.kafka.us-east-1.amazonaws.com:9092,b-3.mskclusterqa.glnopw.c12.kafka.us-east-1.amazonaws.com:9092"
 
 ## If the Kafka Chart is disabled a URL and port are required to connect
 ## e.g. gnoble-panther-cp-schema-registry:8081
 cp-schema-registry:
-  url: ""
+  url: "confluent-platform-cp-schema-registry:8081"
 
 ## List of volumeMounts for connect server container
 ## ref: https://kubernetes.io/docs/concepts/storage/volumes/
@@ -158,6 +161,6 @@ kafkaConnect:
     # - name: connect-transforms
     #   version: confluentinc/connect-transforms:1.4.3
     - name: kafka-connect-jdbc
-      version: confluentinc/kafka-connect-jdbc:latest
+      version: confluentinc/kafka-connect-jdbc:10.7.12
     # - name: kafka-connect-s3
     #   version: confluentinc/kafka-connect-s3:latest
