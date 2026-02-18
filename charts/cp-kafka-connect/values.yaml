@@ -8,7 +8,7 @@ overrideGroupId: confluent-platform
 ## Image Info
 ## ref: https://hub.docker.com/r/confluentinc/cp-kafka/
 image: confluentinc/cp-kafka-connect
-imageTag: 6.1.15
+imageTag: 7.7.7
 
 ## Specify a imagePullPolicy
 ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -25,7 +25,7 @@ servicePort: 8083
 ## Kafka Connect properties
 ## ref: https://docs.confluent.io/current/connect/userguide.html#configuring-workers
 configurationOverrides:
-  "plugin.path": "/usr/share/java,/usr/share/confluent-hub-components,/usr/share/java/kafka-connect-plugins,/usr/share/java/kafka-connect-plugins/kipu-debezium-postgres"
+  "plugin.path": "/usr/share/java,/usr/share/confluent-hub-components,/usr/share/java/kafka-connect-plugins,/opt/confluent/custom-plugins"
   "key.converter": "io.confluent.connect.avro.AvroConverter"
   "value.converter": "io.confluent.connect.avro.AvroConverter"
   "key.converter.schemas.enable": "false"
@@ -41,7 +41,9 @@ heapOptions: "-Xms3g -Xmx3g"
 
 ## Additional env variables
 ## CUSTOM_SCRIPT_PATH is the path of the custom shell script to be ran mounted in a volume
-customEnv: {}
+customEnv:
+  # Append Nashorn to Kafka Classpath (safer than CLASSPATH override)
+  KAFKA_CLASSPATH: "/usr/share/java/kafka-connect-plugins/connect-utils/*"
   # CUSTOM_SCRIPT_PATH: /etc/scripts/create-connectors.sh
 
 resources:
@@ -125,12 +127,11 @@ volumes:
 #     secretName: creds
   - name: plugin-volume
     emptyDir: {}
-  - name: kipu-debezium-plugin-volume
-    configMap:
-      name: kipu-debezium-configmap
   - name: scripts-volume
     configMap:
       name: merge-plugins-script
+  - name: kipu-debezium-plugin-volume
+    emptyDir: {}
   # - name: change-ownership
   #   emptyDir: {}
 
@@ -154,12 +155,14 @@ livenessProbe:
   # periodSeconds: 5
   # failureThreshold: 10
 
+
 kafkaConnect:
+
   plugins:
     # - name: debezium-connector-postgresql
     #   version: debezium/debezium-connector-postgresql:1.0.0
-    # - name: connect-transforms
-    #   version: confluentinc/connect-transforms:1.4.3
+    - name: connect-transforms
+      version: confluentinc/connect-transforms:1.4.3
     - name: kafka-connect-jdbc
       version: confluentinc/kafka-connect-jdbc:10.7.12
     # - name: kafka-connect-s3

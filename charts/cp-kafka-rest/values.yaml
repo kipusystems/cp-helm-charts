@@ -7,7 +7,7 @@ replicaCount: 1
 ## Image Info
 ## ref: https://hub.docker.com/r/confluentinc/cp-kafka/
 image: confluentinc/cp-kafka-rest
-imageTag: 6.1.0
+imageTag: 8.1.1
 
 ## Specify a imagePullPolicy
 ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -97,7 +97,7 @@ cp-zookeeper:
 ## If the Kafka Chart is disabled a URL and port are required to connect
 ## e.g. gnoble-panther-cp-schema-registry:8081
 cp-schema-registry:
-  url: ""
+  url: "confluent-platform-cp-schema-registry:8081"
 
 cp-kafka:
-  bootstrapServers: ""
+  bootstrapServers: "b-1.mskclusterqa.glnopw.c12.kafka.us-east-1.amazonaws.com:9092"

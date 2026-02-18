@@ -40,7 +40,10 @@ spec:
             - sh
             - -c
             - |
-              echo "Mounted volume with custom plugin kipu-debezium (debezium-source-plugin.zip)"
+              wget -O /tmp/plugin.zip https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-source-plugin-2.7.0.zip && \
+              unzip -o /tmp/plugin.zip -d /plugins/debezium-2.7.0 && \
+              rm /tmp/plugin.zip && \
+              chown -R 1000:1000 /plugins
           volumeMounts:
             - name: kipu-debezium-plugin-volume
               mountPath: /plugins
