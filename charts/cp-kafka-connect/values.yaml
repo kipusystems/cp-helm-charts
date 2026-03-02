@@ -37,7 +37,7 @@ configurationOverrides:
   "status.storage.replication.factor": "3"
 
 ## Kafka Connect JVM Heap Option
-heapOptions: "-Xms3g -Xmx3g"
+heapOptions: "-Xms5g -Xmx5g"
 
 ## Additional env variables
 ## CUSTOM_SCRIPT_PATH is the path of the custom shell script to be ran mounted in a volume
@@ -49,10 +49,10 @@ customEnv:
 resources:
   limits:
    cpu: 500m
-   memory: 4Gi
+   memory: 8Gi
   requests:
    cpu: 250m
-   memory: 4Gi
+   memory: 8Gi
 
 ## Custom pod annotations
 podAnnotations: {}
