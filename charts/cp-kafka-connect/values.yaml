@@ -99,7 +99,7 @@ prometheus:
 ## You can list load balanced service endpoint, or list of all brokers (which is hard in K8s).  e.g.:
 ## bootstrapServers: "PLAINTEXT://dozing-prawn-kafka-headless:9092"
 kafka:
-  bootstrapServers: "b-1.mskclusterqa.glnopw.c12.kafka.us-east-1.amazonaws.com:9092,b-2.mskclusterqa.glnopw.c12.kafka.us-east-1.amazonaws.com:9092,b-3.mskclusterqa.glnopw.c12.kafka.us-east-1.amazonaws.com:9092"
+  bootstrapServers: b-1.kafkacluster.6eyr9s.c12.kafka.us-east-1.amazonaws.com:9092,b-2.kafkacluster.6eyr9s.c12.kafka.us-east-1.amazonaws.com:9092,b-3.kafkacluster.6eyr9s.c12.kafka.us-east-1.amazonaws.com:9092"
 
 ## If the Kafka Chart is disabled a URL and port are required to connect
 ## e.g. gnoble-panther-cp-schema-registry:8081
