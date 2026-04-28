@@ -12,6 +12,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: {{ template "cp-kafka-rest.name" . }}
