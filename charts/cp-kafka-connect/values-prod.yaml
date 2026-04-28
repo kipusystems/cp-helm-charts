@@ -170,7 +170,7 @@ ingress:
 ## Autoscaling
 autoscaling:
   enabled: true
-  minReplicas: 70
+  minReplicas: 90
   maxReplicas: 1000
   targetMemoryUtilization: 80
 
