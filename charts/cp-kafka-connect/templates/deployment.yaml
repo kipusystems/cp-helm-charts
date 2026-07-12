@@ -63,7 +63,8 @@ spec:
               mountPath: /plugins
       {{- end }}
         - name: merge-plugins-init
-          image: confluentinc/cp-kafka-connect-base
+          # image: confluentinc/cp-kafka-connect-base
+          image : busybox:1.37.0-glibc
           command: ["/bin/sh", "/scripts/merge-script.sh"]
           volumeMounts:
             - name: plugin-volume
