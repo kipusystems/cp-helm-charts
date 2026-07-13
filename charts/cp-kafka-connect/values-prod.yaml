@@ -156,6 +156,24 @@ livenessProbe:
   # failureThreshold: 10
 
 
+## Ingress
+ingress:
+  enabled: true
+  path: /
+  pathType: Prefix
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/subnets: subnet-0d878e911bdaf9e20,subnet-06d2fc10b11a2b5a2
+
+## Autoscaling
+autoscaling:
+  enabled: true
+  minReplicas: 120
+  maxReplicas: 1000
+  targetMemoryUtilization: 80
+
 kafkaConnect:
 
   plugins:

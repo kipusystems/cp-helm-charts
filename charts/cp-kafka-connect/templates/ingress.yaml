@@ -1,0 +1,24 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ template "cp-kafka-connect.fullname" . }}-ingress
+  labels:
+    app: {{ template "cp-kafka-connect.name" . }}
+    chart: {{ template "cp-kafka-connect.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    {{- toYaml .Values.ingress.annotations | nindent 4 }}
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: {{ template "cp-kafka-connect.fullname" . }}
+                port:
+                  name: kafka-connect
+            path: {{ .Values.ingress.path }}
+            pathType: {{ .Values.ingress.pathType }}
+{{- end }}

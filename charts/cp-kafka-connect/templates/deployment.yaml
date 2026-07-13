@@ -63,7 +63,7 @@ spec:
               mountPath: /plugins
       {{- end }}
         - name: merge-plugins-init
-          image: confluentinc/cp-kafka-connect-base
+          image : debian:13.5-slim
           command: ["/bin/sh", "/scripts/merge-script.sh"]
           volumeMounts:
             - name: plugin-volume
