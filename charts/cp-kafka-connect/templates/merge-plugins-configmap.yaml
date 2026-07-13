@@ -17,20 +17,32 @@ data:
     apt-get install -y curl
 
     mkdir -p /plugins/kipu-debezium-postgres/lib
+    mkdir -p /plugins/connect-transforms/lib
+    mkdir -p /plugins/kafka-connect-file/lib
 
-    curl -o /plugins/kipu-debezium-postgres/lib/debezium-api-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-api-2.0.0-SNAPSHOT.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/debezium-connector-postgres-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-connector-postgres-2.0.0-SNAPSHOT.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/debezium-core-2.0.0-SNAPSHOT.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-core-2.0.0-SNAPSHOT.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/connect-transforms-0.1.1.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/connect-transforms-0.1.1.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/connect-transforms-1.4.2.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/connect-transforms-1.4.2.jar
+    curl -o /plugins/connect-transforms/lib/connect-transforms-0.1.2.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/connect-transforms-0.1.2.jar
+    curl -o /plugins/connect-transforms/lib/nashorn-core-15.4.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/nashorn-core-15.4.jar
     curl -o /plugins/kipu-debezium-postgres/lib/postgresql-42.3.3.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/postgresql-42.3.3.jar
+    curl -o /plugins/connect-transforms/lib/connect-utils-0.1.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/connect-utils-0.1.0.jar
     curl -o /plugins/kipu-debezium-postgres/lib/connect-utils-0.1.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/connect-utils-0.1.0.jar
-    curl -o /plugins/kipu-debezium-postgres/lib/kafka-connect-jdbc-10.4.1.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/kafka-connect-jdbc-10.4.1.jar
+    curl -o /plugins/kipu-debezium-postgres/lib/kafka-connect-jdbc-10.7.6.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/kafka-connect-jdbc-10.7.6.jar
+    curl -o /plugins/connect-transforms/lib/json-path-2.9.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/json-path-2.9.0.jar
+    curl -o /plugins/connect-transforms/lib/json-smart-2.5.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/json-smart-2.5.0.jar
+    curl -o /plugins/connect-transforms/lib/accessors-smart-2.5.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/accessors-smart-2.5.0.jar
+    curl -o /plugins/connect-transforms/lib/asm-9.5.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/asm-9.5.jar
+    curl -o /plugins/connect-transforms/lib/asm-util-9.5.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/asm-util-9.5.jar
+    curl -o /plugins/connect-transforms/lib/asm-commons-9.5.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/asm-commons-9.5.jar
+    curl -o /plugins/connect-transforms/lib/asm-tree-9.5.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/asm-tree-9.5.jar
+    curl -o /plugins/connect-transforms/lib/asm-analysis-9.5.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/asm-analysis-9.5.jar
+    curl -o /plugins/kafka-connect-file/lib/connect-file-3.7.1.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/connect-file-3.7.1.jar
+    curl -o /plugins/connect-transforms/lib/schema-router-1.0.0.jar https://kipu-wiki.s3.amazonaws.com/test-plugin/schema-router-1.0.0.jar
     
     echo "Done merging custom plugins into Kafka Connect plugins directory"
-
+    
     echo "Setting permissions on Kafka Connect plugins directory"
-    chwon -R appuser:appuser /plugins/kipu-debezium-postgres
+    chown -R appuser:appuser /plugins/kipu-debezium-postgres
+    chown -R appuser:appuser /plugins/connect-transforms
+    chown -R appuser:appuser /plugins/kafka-connect-file
 
     echo "Listing contents of Kafka Connect plugins directory"
     ls -l /plugins

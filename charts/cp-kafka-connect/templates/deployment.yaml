@@ -40,7 +40,10 @@ spec:
             - sh
             - -c
             - |
-              echo "Mounted volume with custom plugin kipu-debezium (debezium-source-plugin.zip)"
+              wget -O /tmp/plugin.zip https://kipu-wiki.s3.amazonaws.com/test-plugin/debezium-source-plugin-2.7.0.zip && \
+              unzip -o /tmp/plugin.zip -d /plugins/debezium-2.7.0 && \
+              rm /tmp/plugin.zip && \
+              chown -R 1000:1000 /plugins
           volumeMounts:
             - name: kipu-debezium-plugin-volume
               mountPath: /plugins
@@ -60,7 +63,7 @@ spec:
               mountPath: /plugins
       {{- end }}
         - name: merge-plugins-init
-          image: confluentinc/cp-kafka-connect-base
+          image : debian:13.5-slim
           command: ["/bin/sh", "/scripts/merge-script.sh"]
           volumeMounts:
             - name: plugin-volume
@@ -111,7 +114,7 @@ spec:
                 fieldRef:
                   fieldPath: status.podIP
             - name: CONNECT_BOOTSTRAP_SERVERS
-              value: {{ template "cp-kafka-connect.kafka.bootstrapServers" . }}
+              value: {{ .Values.kafka.bootstrapServers }}
             - name: CONNECT_GROUP_ID
               value: {{ template "cp-kafka-connect.groupId" . }}
             - name: CONNECT_CONFIG_STORAGE_TOPIC
@@ -142,13 +145,6 @@ spec:
               value: '60000'
             - name: OFFSET_FLUSH_INTERVAL_MS
               value: '15000'
-          resources:
-            limits:
-              cpu: '1'
-              memory: 6Gi
-            requests:
-              cpu: 500m
-              memory: 6Gi
         {{- if .Values.customEnv.CUSTOM_SCRIPT_PATH }}
           command:
             - /bin/bash

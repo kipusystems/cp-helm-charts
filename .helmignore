@@ -22,6 +22,7 @@
 # Images and archives
 *.png
 *.tgz
+*.zip
 scripts/
 screenshots/
 docs/

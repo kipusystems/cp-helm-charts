@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cp-kafka-connect-prod
+  namespace: argo
+spec:
+  project: emr-prod
+  source:
+    repoURL: https://github.com/kipusystems/cp-helm-charts.git
+    targetRevision: CO-35161/deploy-debezium-upgrade-to-Prod
+    path: charts/cp-kafka-connect
+    helm:
+      releaseName: confluent-platform
+      valueFiles:
+        - values-prod.yaml
+  destination:
+    name: EMR-Prod
+    namespace: confluent-platform
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=false
