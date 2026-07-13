@@ -158,6 +158,13 @@ livenessProbe:
   # periodSeconds: 5
   # failureThreshold: 10
 
+## Autoscaling
+autoscaling:
+  enabled: true
+  minReplicas: 5
+  maxReplicas: 30
+  targetMemoryUtilization: 80
+
 
 kafkaConnect:
 
